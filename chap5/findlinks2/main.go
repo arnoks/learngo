@@ -1,3 +1,4 @@
+// Retreive all links from a website and print them to stdout
 package main
 
 import (
@@ -19,17 +20,19 @@ func main() {
 }
 
 func visit(links []string, n *html.Node) []string {
+
+	if n.FirstChild != nil {
+		links = visit(links, n.FirstChild.NextSibling)
+	}
+
+	fmt.Printf("Scanning Node\n")
 	if n.Type == html.ElementNode && n.Data == "a" {
 		for _, a := range n.Attr {
 			if a.Key == "href" {
 				links = append(links, a.Val)
-				fmt.Printf("Found link: %s\n", a.Val)
+				fmt.Printf("Appending %s\n", a.Val)
 			}
 		}
-	}
-	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		fmt.Printf("Visiting next child",c.)
-		links = visit(links, c)
 	}
 	return links
 }
