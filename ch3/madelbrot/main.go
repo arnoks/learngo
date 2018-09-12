@@ -20,7 +20,7 @@ func main() {
 		for px := 0; px < width; px++ {
 			x := float64(px)/width*(xmax-xmin) + xmin
 			z := complex(x, y)
-			img.Set(px, py, madelbrot_color(z))
+			img.Set(px, py, madelbrot_grey(z))
 		}
 	}
 	png.Encode(os.Stdout, img)
