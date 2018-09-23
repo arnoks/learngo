@@ -18,7 +18,7 @@ func main() {
 	bgc := color.Gray{uint8(*bg)}
 	fgc := color.Gray{uint8(*fg)}
 
-	l := lissajous.Parameter{*freq, []color.Color{bgc, fgc}}
+	l := lissajous.Parameter{Freq: *freq, Palette: []color.Color{bgc, fgc}}
 	l.Draw(os.Stdout)
 	//	lissajous.Lissajous(os.Stdout)
 }
