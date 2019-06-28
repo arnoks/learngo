@@ -1,5 +1,6 @@
 // dup1 is a simple program for finding duplicate lines in the input
-// it searches for lines in Stdin and prints their frequency to Stdout
+// it searches for lines in Stdin and prints the frequency to Stdout
+// the output is no sorted an will differ for each run
 package main
 
 import (

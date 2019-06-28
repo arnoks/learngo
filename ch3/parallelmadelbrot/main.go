@@ -1,5 +1,5 @@
-// parallelmdelbrot uses a go routine per stride. Each stride get updated
-// independently. Parallel updates of the strides does not seem to be an issue
+// parallelmadelbrot uses a go routine per stride. Each stride gets updated
+// independently. Parallel updates of the strides is supported
 // for the image data structure.
 
 package main

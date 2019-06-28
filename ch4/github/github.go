@@ -3,7 +3,7 @@ package github
 
 import "time"
 
-// SDee https://developer.github.com/v3/search/#search-issues
+// See https://developer.github.com/v3/search/#search-issues
 
 const IssueURL = "https://api.github.com/search/issues"
 

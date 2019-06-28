@@ -1,5 +1,6 @@
 // dup2 will find duplicates in all its input files
-//
+// by looping over the files passed in via cmdline parameters.
+
 package main
 
 import (
@@ -17,12 +18,11 @@ func main() {
 	} else { // loop over the files
 		for _, file := range files {
 			fp, err := os.Open(file)
-			if err == nil {
-				countLines(fp, counts)
-			} else {
+			if err != nil {
 				fmt.Fprintf(os.Stderr, "dup2: %v\n", err)
 				continue
 			}
+			countLines(fp, counts)
 		}
 	}
 	for line, n := range counts {

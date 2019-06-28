@@ -1,7 +1,7 @@
-// Mandelbrot2 uses a confined image which is updated by the setPoint go
+// pMandelbrot2 uses a confined image which is updated by the setPoint go
 // routine. This was done to make the image update concurrency proof. The
 // implementation using a queue operation for each point has lots of overhead
-// and is lower than the single threaded implementation.
+// and perfromance is much lower than the single threaded implementation.
 
 package main
 
