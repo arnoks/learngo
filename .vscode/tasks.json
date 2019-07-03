@@ -7,6 +7,12 @@
             "label": "echo",
             "type": "shell",
             "command": "echo Hello"
+        },
+        {
+            "label": "lissajous",
+            "type": "shell",
+            "command": "go run github.com/arnoks/learngo/ch1/lissajous/white/  ",
+            "problemMatcher": []
         }
     ]
 }
