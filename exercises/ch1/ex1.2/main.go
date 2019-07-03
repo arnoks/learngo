@@ -1,5 +1,7 @@
 package main
 
+// echo command printing both the index and the argument itself
+
 import (
 	"fmt"
 	"os"

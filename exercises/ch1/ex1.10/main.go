@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -32,8 +33,31 @@ func fetch(url string, ch chan<- string) {
 		ch <- fmt.Sprint(err) // report get error
 		return
 	}
-	nbytes, err := io.Copy(ioutil.Discard, resp.Body)
-	resp.Body.Close()
+	defer resp.Body.Close()
+
+	// create canonical file prefix based on the url
+
+	var pattern string
+	switch {
+	case strings.HasPrefix(url, "https://"):
+		pattern = strings.ReplaceAll(strings.TrimPrefix(url, "https://"), "/", "_")
+	case strings.HasPrefix(url, "http://"):
+		pattern = strings.ReplaceAll(strings.TrimPrefix(url, "http://"), "/", "_")
+	default:
+		pattern = strings.ReplaceAll(url, "/", "_")
+	}
+	pattern += "_*.html"
+
+	destination, err := ioutil.TempFile("", pattern)
+
+	if err != nil {
+		ch <- fmt.Sprint(err)
+		return
+	}
+
+	defer destination.Close()
+	nbytes, err := io.Copy(destination, resp.Body)
+
 	if err != nil {
 		ch <- fmt.Sprintf("while reading %s: %v", url, err) // report read error
 		return

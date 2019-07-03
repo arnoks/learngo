@@ -1,32 +1,35 @@
 // fetch prints the content found at url to stdout
 // fetch <url> > content
+// add the prefix http:// to each argument URL if it is
+// missing using strings.HasPrefix
+
 package main
-
-/*
-fetch 17 is using io.Copy(dst,src)instead of ioutil.ReadAll to copy the
-response body.
-
-os.Stdout without requiring a buffer large enough to hold the entire stream. Be sure to
-check the error result of io.Copy
-*/
 
 import (
 	"fmt"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
+	"strings"
 )
 
 func main() {
 	for _, url := range os.Args[1:] {
+		switch {
+		case strings.HasPrefix(url, "http://"):
+			break
+		case strings.HasPrefix(url, "https://"):
+			break
+		default:
+			url = "http://" + url
+		}
+
 		resp, err := http.Get(url)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
 			os.Exit(1)
 		}
-		src := Open(url)
-		dst := os.Stdio
-		_, err := io.Copy(dst, src)
+		b, err := ioutil.ReadAll(resp.Body)
 		resp.Body.Close()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "fetch: reading %s: %v\n", url, err)

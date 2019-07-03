@@ -1,5 +1,7 @@
 package main
 
+// Print all commandline parameters and include the prgram itself Args[0]
+
 import (
 	"fmt"
 	"os"
