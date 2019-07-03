@@ -1,5 +1,5 @@
-/* Server1 is a simple webserver which answers any url with the url string
- */
+// server2 is a minimal echo and counter sever
+
 package main
 
 import (
@@ -18,16 +18,17 @@ func main() {
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 
+// handler echoes the PAth component of the Request
 func handler(w http.ResponseWriter, r *http.Request) {
 	mu.Lock()
-	count += 1
+	count++
 	mu.Unlock()
 	fmt.Fprintf(w, "URL.Path = %q\n", r.URL.Path)
 }
 
+// counter echo the number of calls so far
 func counter(w http.ResponseWriter, r *http.Request) {
 	mu.Lock()
 	fmt.Fprintf(w, "Count %d\n", count)
-	count += 1
 	mu.Unlock()
 }
