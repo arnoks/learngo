@@ -10,8 +10,8 @@ import (
 func TestPopoCounts(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		v := rand.Uint64()
-		p, l := PopCount(v), PopCountLoop(v)
-		if PopCount(v) != PopCountLoop(v) {
+		p, l := PopCount(v), Loop(v)
+		if p != l {
 			t.Errorf("Error, PopCounts yield different results for %v : %v != %v ", v, p, l)
 		}
 	}

@@ -7,8 +7,8 @@ the performance of the two versions.
 
 ## Implementation
 
-a) Using a simple loop to go voer all byte of the input variable x
-b) Add package tests benchmark to compare the performance of both versions.
+a.  Using a simple loop to go voer all byte of the input variable x
+b. Add package tests benchmark to compare the performance of both versions.
 
 ## Results
 

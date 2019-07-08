@@ -15,12 +15,12 @@ func BenchmarkPopCount(b *testing.B) {
 	}
 }
 
-// BenchmarkPopCountLoop  meassure the loop implemention
-func BenchmarkPopCountLoop(b *testing.B) {
+// BenchmarkLoop  meassure the loop implemention
+func BenchmarkLoop(b *testing.B) {
 	// run the Fib function b.N times
 	var r uint64
 	for n := 0; n < b.N; n++ {
 		r = rand.Uint64()
-		PopCountLoop(r)
+		Loop(r)
 	}
 }

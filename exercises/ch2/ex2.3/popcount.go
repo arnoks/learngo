@@ -22,8 +22,8 @@ func PopCount(x uint64) int {
 		pc[byte(x>>(7*8))])
 }
 
-// PopCountLoop calculates the population count using a loop
-func PopCountLoop(x uint64) int {
+// Loop calculates the population count using a loop
+func Loop(x uint64) int {
 	var c byte
 	for i := uint(0); i < 8; i++ {
 		c += pc[byte(x>>(i*8))]
