@@ -30,3 +30,22 @@ func Loop(x uint64) int {
 	}
 	return int(c)
 }
+
+// Shift calculates the population count using a loop and shift through 64 bits
+func Shift(x uint64) int {
+	var c uint64
+	for i := uint64(0); i < 64; i++ {
+		c += x & 1
+		x = x >> 1
+	}
+	return int(c)
+}
+
+// Eliminate calculates the population count using bit elimination
+func Eliminate(x uint64) int {
+	c := 0
+	for ; x != 0; c++ {
+		x = x & (x - 1)
+	}
+	return c
+}

@@ -9,8 +9,8 @@ import (
 func BenchmarkPopCount(b *testing.B) {
 	// run the Fib function b.N times
 	var r uint64
+	r = rand.Uint64()
 	for n := 0; n < b.N; n++ {
-		r = rand.Uint64()
 		PopCount(r)
 	}
 }
@@ -19,8 +19,28 @@ func BenchmarkPopCount(b *testing.B) {
 func BenchmarkLoop(b *testing.B) {
 	// run the Fib function b.N times
 	var r uint64
+	r = rand.Uint64()
 	for n := 0; n < b.N; n++ {
-		r = rand.Uint64()
 		Loop(r)
+	}
+}
+
+// BenchmarkShift meassure the loop implemention
+func BenchmarkShift(b *testing.B) {
+	// run the Fib function b.N times
+	var r uint64
+	r = rand.Uint64()
+	for n := 0; n < b.N; n++ {
+		Shift(r)
+	}
+}
+
+// BenchmarkEliminate
+func BenchmarkEliminate(b *testing.B) {
+	// run the Fib function b.N times
+	var r uint64
+	r = rand.Uint64()
+	for n := 0; n < b.N; n++ {
+		Eliminate(r)
 	}
 }
