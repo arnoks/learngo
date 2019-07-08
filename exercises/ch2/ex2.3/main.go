@@ -10,7 +10,7 @@ func init() {
 	}
 }
 
-//popcount returns the population count - number of set bit within a uint64
+// PopCount returns the population count - number of set bit within a uint64
 func PopCount(x uint64) int {
 	return int(pc[byte(x>>(0*8))] +
 		pc[byte(x>>(1*8))] +
