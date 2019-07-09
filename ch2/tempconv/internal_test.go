@@ -2,27 +2,32 @@
 package tempconv
 
 import (
-	"fmt"
-	"os"
 	"testing"
 )
 
-func TestConversion(t *testing.T) {
-	var f = []Fahrenheit{32.0, 212.0, 68.0, 77}
-	var c = []Celsius{0.0, 100.0, 20.0, 25}
+func TestCFConversion(t *testing.T) {
+	var c = []Celsius{FreezingC, BoilingC, 20.0, 25.}
+	var k = []Kelvin{FreezingK, BoilingK, 293.15, 298.15}
+	var f = []Fahrenheit{FreezingF, BoilingF, 68.0, 77.}
 
 	for i := 0; i < len(f); i++ {
-		if CToF(c[i]) != f[i] {
-			fmt.Printf("Failed to converted from Celsius to Fahrenheit: %g°C != %g°F\n", c[i], f[i])
-			os.Exit(1)
-		} else {
-			fmt.Printf("Success converted from Celsius to Fahrenheit: %g°C == %g°F\n", c[i], f[i])
+		if CtoF(c[i]) != f[i] {
+			t.Errorf("Failed converting from Celsius to Fahrenheit: %v != %v\n", c[i], f[i])
 		}
-		if FToC(f[i]) != c[i] {
-			fmt.Printf("Failed to converted from Fahrenheit to Celsius %g°F != %g°C\n", f[i], c[i])
-			os.Exit(1)
-		} else {
-			fmt.Printf("Success converted from Fahrenheit to Celsius %g°F == %g°C\n", f[i], c[i])
+		if FtoC(f[i]) != c[i] {
+			t.Errorf("Failed converting from Fahrenheit to Celsius %v != %v\n", f[i], c[i])
+		}
+		if CtoK(c[i]) != k[i] {
+			t.Errorf("Failed converting from Celsius to Kelvin %v != %v\n", c[i], k[i])
+		}
+		if KtoC(k[i]) != c[i] {
+			t.Errorf("Failed converting from Kelvin to Celsius %v != %v\n", k[i], c[i])
+		}
+		if FtoK(f[i]) != k[i] {
+			t.Errorf("Failed converting from Fahrenheit to Kelvin %v != %v\n", f[i], k[i])
+		}
+		if KtoF(k[i]) != f[i] {
+			t.Errorf("Failed converting from Fahrenheit to Kelvin %v != %v\n", k[i], f[i])
 		}
 	}
 }

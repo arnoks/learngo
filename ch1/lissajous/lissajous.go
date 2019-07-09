@@ -69,7 +69,7 @@ func (p *Parameter) Draw(out io.Writer) {
 	gif.EncodeAll(out, &g)
 }
 
-// Lissajous Draws a standard Lissajous
+// LissajousFun Draws a standard Lissajous
 func Lissajous(out io.Writer) {
 	var p = Parameter{rand.Float64() * 3.0, []color.Color{color.White, color.Black}}
 	p.Draw(out)
