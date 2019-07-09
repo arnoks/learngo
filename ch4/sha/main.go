@@ -5,27 +5,36 @@ import (
 	"crypto/sha512"
 	"flag"
 	"fmt"
+	"os"
 )
 
-var sha = flag.String("sha", "256", "Select either of the hash functions 256 384 512")
-
 func main() {
+	var v string
+	algo := flag.String("a", "sha256", "Select either of the hash functions")
 	flag.Parse()
-	a := flag.Args()
-	for _, s := range a {
-		ba := []byte(s)
+	if len(os.Args) > 1 {
+		v = os.Args[len(os.Args)-1]
+	}
+	hash(v, algo)
+}
 
-		var hash *byte
+func hash(s string, algo *string) {
+	if s == "" {
+		s = "a"
+	}
+	switch {
+	case *algo == "sha512":
+		{
+			fmt.Printf("sha512(%s) = %v\n", s, sha512.Sum512([]byte(s)))
+		}
+	case *algo == "sha384":
+		{
+			fmt.Printf("sha384(%s) = %v\n", s, sha512.Sum384([]byte(s)))
+		}
 
-		if *sha == "256" {
-			hash = sha256.Sum256(ba)
+	default:
+		{
+			fmt.Printf("sha256(%s) = %v\n", s, sha256.Sum256([]byte(s)))
 		}
-		if *sha == "384" {
-			hash = sha512.Sum384(ba)
-		}
-		if *sha == "512" {
-			hash = sha512.Sum512(ba)
-		}
-		fmt.Printf("%b\n", hash)
 	}
 }

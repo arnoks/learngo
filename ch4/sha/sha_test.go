@@ -1,11 +1,10 @@
 package main
 
 import (
-	"os"
 	"testing"
 )
 
-func TestMain(m *testing.M) {
+func TestMain(t *testing.T) {
 	main()
-	os.Exit(0)
+	t.Error("Forced fail") // force display of output while running the test
 }
