@@ -1,11 +1,12 @@
 package main
 
 import (
-	"os"
+	"fmt"
 	"testing"
 )
 
-func TestMain(m *testing.M) {
+func TestMain(t *testing.T) {
+	fmt.Printf("executing %s\n", t.Name())
 	main()
-	os.Exit(0)
+	t.Error("forced fail") // always fail to force output to be displayed
 }

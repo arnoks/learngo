@@ -5,27 +5,32 @@ import (
 	"fmt"
 )
 
+var pc [256]byte
+
+func init() {
+	for i := range pc {
+		pc[i] = pc[i/2] + byte(i&1)
+	}
+}
+
 func main() {
 
 	c1 := sha256.Sum256([]byte("a"))
 	c2 := sha256.Sum256([]byte("A"))
-	fmt.Printf("% x\n% x\n%t\n%T\n", c1, c2, c1 == c2, c1)
-	d := bitDiffCount(&c1, &c2)
+	fmt.Printf("% x\n% x\n Hashes equal? =  %t\n", c1, c2, c1 == c2)
+	s1 := c1[:]
+	s2 := c2[:]
+	d := bitDiffCount(&s1, &s2)
 	fmt.Printf("Bitcount: = %d/%d\n", d, 32*8)
 
 }
 
-func bitDiffCount(aPtr *[32]byte, bPtr *[32]byte) int {
-	var bc int
-
+// Count different bits ex 4.1
+func bitDiffCount(aPtr *[]byte, bPtr *[]byte) int {
+	var bc byte
 	for i, a := range *aPtr {
-		r := a ^ bPtr[i]
-		for j := uint(0); j < 8; j++ {
-			mask := byte(1 << j)
-			if mask&r != 0 {
-				bc++
-			}
-		}
+		r := a ^ (*bPtr)[i]
+		bc += pc[r]
 	}
-	return bc
+	return int(bc)
 }
