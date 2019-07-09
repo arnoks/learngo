@@ -26,7 +26,7 @@ type Parameter struct {
 	Palette []color.Color
 }
 
-// MakeGif generates fills the provided gif with a Lissajous figure
+// MakeGif fills the provided gif with a Lissajous figure
 // it uses a standard two color Palette
 func (p *Parameter) MakeGif(g *gif.GIF) {
 	phase := 0.0
@@ -44,7 +44,7 @@ func (p *Parameter) MakeGif(g *gif.GIF) {
 	}
 }
 
-// MakeColoredGif generasted a colorful lissajous based on a standard palette
+// MakeColoredGif generats a colorful lissajous based on a standard palette
 func (p *Parameter) MakeColoredGif(g *gif.GIF) {
 	phase := 0.0
 
@@ -62,7 +62,7 @@ func (p *Parameter) MakeColoredGif(g *gif.GIF) {
 	}
 }
 
-// Draw draws a Lissojous to the writer
+// Draw dumps a lissajous to the given writer
 func (p *Parameter) Draw(out io.Writer) {
 	g := gif.GIF{LoopCount: 64}
 	p.MakeGif(&g)
