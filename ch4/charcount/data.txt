@@ -1,0 +1,14 @@
+Dank Fortschritten im maschinellem Lernen ist es heute kein Problem mehr, Computer Texte von einer Sprache in andere übertragen zu lassen. Voraussetzung dafür ist allerdings, dass große Datenbanken mit Beispiel-Texten vorliegen, anhand derer Maschinen die Strukturen der jeweiligen Sprache erlernen und abgleichen können. Doch ein Team um Jiaming Luo vom MIT hat jetzt gezeigt, dass die Prinzipien dahinter auch mit weitaus weniger Material nützlich sein können: Mit Computer-Hilfe entschlüsselten sie Texte in zwei Sprachen, die seit Jahrhunderten nicht mehr verwendet werden. Das berichtet Technology Review online in "Computer versteht verlorene Sprachen".
+
+Die erste Sprache, auf die Luo und Kollegen ihr System anwendeten, war Linearschrift B, eine im 19. Jahrhundert auf Steinen und Tafeln auf Kreta entdeckte Sprache, die nach späteren Erkenntnissen auf einer alten Form von Griechisch beruht. Nach vielen erfolglosen Versuchen wurde sie erst 1953 von dem Amateurlinguisten Michael Ventris entziffert. Das Gleiche gelang jetzt den Forschern um Luo, nach ihren Angaben zum ersten Mal rein computerbasiert. Außerdem entzifferten sie auch die Ugaritische Schrift automatisch.
+
+Bei normalen Maschinen-Übersetzungen werden die einzelnen Worte anhand ihrer Häufigkeit und Nachbarschaft zu anderen Worten als Vektoren in einem Parameter-Raum definiert. Das Übersetzen von Sätzen bedeutet dann, ähnliche Wege durch die jeweiligen Parameter-Räume zu finden. Die Notwendigkeit, dafür zunächst anhand großer Textmengen zu trainieren, umgingen die Forscher, indem sie Informationen über die Vorgänger der beiden entschlüsselten Sprachen sowie über Sprachevolution allgemein berücksichtigten. Noch offen ist allerdings die Entschlüsselung von Schriften der ebenfalls auf Kreta gefundenen älteren "Linearschrift A".
+
+
+Deustche Spezial Charakter:
+üöäß
+
+Symbole:
+°^2²~µ
+
+

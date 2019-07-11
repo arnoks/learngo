@@ -1,3 +1,4 @@
+// charcount computes counts of Unicode characters
 package main
 
 import (
