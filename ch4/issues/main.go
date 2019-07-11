@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/arnoks/learngo/chap4/github"
+	"github.com/arnoks/learngo/ch4/github"
 )
 
 func main() {

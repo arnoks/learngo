@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-// Movie defines an arbitrarx moview structure for demo purposes
+// Movie define an arbitrary movie structure for demo purposes
 type Movie struct {
 	Title  string
 	Year   int  `json:"released"`
