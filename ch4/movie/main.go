@@ -6,6 +6,7 @@ import (
 	"log"
 )
 
+// Movie defines an arbitrarx moview structure for demo purposes
 type Movie struct {
 	Title  string
 	Year   int  `json:"released"`
@@ -39,5 +40,4 @@ func main() {
 		log.Fatalf("json unmarshaling failed: %s", err)
 	} // uses reflection
 	fmt.Printf("%s\n", titles)
-
 }
