@@ -205,3 +205,27 @@ func TestIntSet_Copy(t *testing.T) {
 		})
 	}
 }
+
+func TestIntSet_AddAll(t *testing.T) {
+	type args struct {
+		vals []int
+	}
+	tests := []struct {
+		name string
+		s    IntSet
+		args args
+		want string
+	}{
+		{"Adding 1-5 to an empty set", IntSet{}, args{[]int{1, 2, 3, 4, 5}}, "{1 2 3 4 5}"},
+		{"Adding five and one large values to an empty set", IntSet{}, args{[]int{1, 2, 3, 4, 5, 222}}, "{1 2 3 4 5 222}"},
+		{"Adding five and one x-large values to an empty set", IntSet{}, args{[]int{1, 2, 3, 4, 5, 684}}, "{1 2 3 4 5 684}"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.s.AddAll(tt.args.vals...)
+			if got := tt.s.String(); got != string(tt.want) {
+				t.Errorf("IntSet.AddAll() = %v, want %v", got, string(tt.want))
+			}
+		})
+	}
+}

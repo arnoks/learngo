@@ -91,6 +91,13 @@ func (s *IntSet) Copy() *IntSet {
 	return &c
 }
 
+// AddAll method allwos a list of values to be added, such as s.AddAll(1,2,3)
+func (s *IntSet) AddAll(vals ...int) {
+	for _, val := range vals {
+		s.Add(val)
+	}
+}
+
 func main() {
 
 }
