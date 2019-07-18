@@ -57,6 +57,40 @@ func (s *IntSet) String() string {
 	return buf.String()
 }
 
+// Len returns the number of elements ex 6.1
+func (s *IntSet) Len() (len int) {
+	for _, word := range s.words {
+		len += popCount(word)
+	}
+	return len
+}
+
+// Remove x from the set of elements ex 6.1
+func (s *IntSet) Remove(x int) {
+	word, bit := x/64, x%64
+	if s.Has(x) != true {
+		return
+	}
+	s.words[word] ^= 1 << uint(bit)
+}
+
+// Clear removes all elements from the set ex 6.1
+func (s *IntSet) Clear() {
+	for i := range s.words {
+		s.words[i] = 0
+	}
+}
+
+// Copy returns a copy of the set ex 6.1
+func (s *IntSet) Copy() *IntSet {
+	var c IntSet
+	c.words = make([]uint64, len(s.words))
+	for i, word := range s.words {
+		c.words[i] = word
+	}
+	return &c
+}
+
 func main() {
 
 }

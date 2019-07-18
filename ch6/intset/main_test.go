@@ -49,7 +49,7 @@ func TestIntSet_Add(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			tt.s.Add(tt.args.x)
 			if got := tt.s.Has(tt.args.x); got != tt.want {
-				t.Errorf("got: %v want: %v", got, tt.want)
+				t.Errorf("TestIntSet_Add() got: %v want: %v", got, tt.want)
 			}
 		})
 	}
@@ -79,7 +79,7 @@ func TestIntSet_UnionWith(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			tt.s.UnionWith(tt.args.t)
 			if tt.s.String() != tt.want {
-				t.Errorf("Want %v , got %v ", tt.want, tt.s)
+				t.Errorf("TestIntSet_UnionWith() got %v, Want %v ", tt.s, tt.want)
 			}
 		})
 	}
@@ -108,6 +108,99 @@ func TestIntSet_String(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := tt.s.String(); got != tt.want {
 				t.Errorf("IntSet.String() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestIntSet_Len(t *testing.T) {
+	var s IntSet
+	tests := []struct {
+		name    string
+		s       *IntSet
+		wantLen int
+	}{
+		{"Len of empty set", &s, 0},
+		{"Len of empty set", &s, 1},
+		{"Len of empty set", &s, 2},
+		{"Len of empty set", &s, 3},
+	}
+	for i, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotLen := tt.s.Len(); gotLen != tt.wantLen {
+				t.Errorf("IntSet_Len() = %v, want %v", gotLen, tt.wantLen)
+			}
+		})
+		s.Add(i)
+	}
+}
+
+func TestIntSet_Remove(t *testing.T) {
+	var s IntSet
+	s.Add(200)
+
+	type args struct {
+		x int
+	}
+	tests := []struct {
+		name string
+		s    *IntSet
+		args args
+		want string
+	}{
+		{"Remove non existent element", &s, args{1}, "{200}"},
+		{"Remove on outside range element", &s, args{512}, "{200}"},
+		{"Remove element", &s, args{200}, "{}"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.s.Remove(tt.args.x)
+			if got := tt.s.String(); got != tt.want {
+				t.Errorf("IntSet_Remove(): %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestIntSet_Clear(t *testing.T) {
+	var s IntSet
+	s.Add(1)
+	s.Add(100)
+
+	tests := []struct {
+		name string
+		s    *IntSet
+	}{
+		{"Clear empty Set", &IntSet{}},
+		{"Clear populate Set", &s},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.s.Clear()
+			if got := tt.s.String(); got != "{}" {
+				t.Error("IntSet_Clear, set not cleared")
+			}
+		})
+	}
+}
+
+func TestIntSet_Copy(t *testing.T) {
+	var s IntSet
+	var s2 IntSet
+	s2.Add(100)
+
+	tests := []struct {
+		name string
+		s    *IntSet
+		want *IntSet
+	}{
+		{"Copy Empty Set", &s, &IntSet{}},
+		{"Copy filled Set", &s2, &s2},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.s.Copy(); got.String() != tt.s.String() || &got.words == &tt.s.words {
+				t.Errorf("IntSet.Copy() = %v, want %v", got, tt.want)
 			}
 		})
 	}

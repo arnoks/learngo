@@ -27,8 +27,3 @@ func TestHypot(t *testing.T) {
 		}
 	}
 }
-
-/*func TestMain(m *testing.M) {
-	main()
-}
-*/
