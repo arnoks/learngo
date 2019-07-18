@@ -18,17 +18,16 @@ func main() {
 	}
 }
 
+// visit append to links each link found in n abd returns the result.
 func visit(links []string, n *html.Node) []string {
 	if n.Type == html.ElementNode && n.Data == "a" {
 		for _, a := range n.Attr {
 			if a.Key == "href" {
 				links = append(links, a.Val)
-				fmt.Printf("Found link: %s\n", a.Val)
 			}
 		}
 	}
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		fmt.Printf("Visiting next child",c.)
 		links = visit(links, c)
 	}
 	return links
