@@ -1,6 +1,7 @@
-package main
+package intset
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -308,6 +309,40 @@ func TestIntSet_DifferenceWith(t *testing.T) {
 			tt.s.AddAll(tt.args.s1...)
 			tt.s.AddAll(tt.args.s2...)
 			tt.s.DifferenceWith(tt.args.t)
+		})
+	}
+}
+
+// Verify expression for determining the archtiecture size
+func TestArchitectureSize(t *testing.T) {
+	const (
+		as = 32 << (^uint(0) >> 63)
+	)
+	switch as {
+	case 32:
+		t.Log("Found 32 bit architecture")
+	case 64:
+		t.Log("Found 64 bit architecture")
+	default:
+		t.Error("Found unexpected architecture size")
+	}
+}
+
+func TestIntSet_Elems(t *testing.T) {
+	tests := []struct {
+		name string
+		s    *IntSet
+		want []int
+	}{
+		{"One", &IntSet{}, []int{1, 2, 3, 4, 5}},
+		{"Two", &IntSet{}, []int{1, 2, 3, 4, 5}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.s.AddAll(tt.want...)
+			if got := tt.s.Elems(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("IntSet.Elems() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }

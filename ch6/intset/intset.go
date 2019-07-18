@@ -1,4 +1,4 @@
-package main
+package intset
 
 import (
 	"bytes"
@@ -7,18 +7,23 @@ import (
 
 // IntSet defines an integer set for small positive integers
 type IntSet struct {
-	words []uint64
+	words []uint
 }
+
+// Wordsize is the word size of the architecture 32 or 64 bit
+const (
+	WordSize = 32 << (^uint(0) >> 63)
+)
 
 // Has reports whether a set contains non-negative value x
 func (s *IntSet) Has(x int) bool {
-	word, bit := x/64, x%64
+	word, bit := x/WordSize, x%WordSize
 	return word < len(s.words) && s.words[word]&(1<<uint(bit)) != 0
 }
 
 // Add adds a non-negative integer to the set
 func (s *IntSet) Add(x int) {
-	word, bit := x/64, x%64
+	word, bit := x/WordSize, x%WordSize
 	for word >= len(s.words) {
 		s.words = append(s.words, 0)
 	}
@@ -44,12 +49,12 @@ func (s *IntSet) String() string {
 		if word == 0 {
 			continue
 		}
-		for j := 0; j < 64; j++ {
+		for j := 0; j < WordSize; j++ {
 			if word&(1<<uint(j)) != 0 {
 				if buf.Len() > len("{") {
 					buf.WriteByte(' ')
 				}
-				fmt.Fprintf(&buf, "%d", 64*i+j)
+				fmt.Fprintf(&buf, "%d", WordSize*i+j)
 			}
 		}
 	}
@@ -67,7 +72,7 @@ func (s *IntSet) Len() (len int) {
 
 // Remove x from the set of elements ex 6.1
 func (s *IntSet) Remove(x int) {
-	word, bit := x/64, x%64
+	word, bit := x/WordSize, x%WordSize
 	if s.Has(x) != true {
 		return
 	}
@@ -84,7 +89,7 @@ func (s *IntSet) Clear() {
 // Copy returns a copy of the set ex 6.1
 func (s *IntSet) Copy() *IntSet {
 	var c IntSet
-	c.words = make([]uint64, len(s.words))
+	c.words = make([]uint, len(s.words))
 	for i, word := range s.words {
 		c.words[i] = word
 	}
@@ -130,6 +135,22 @@ func (s *IntSet) SymmetricDifference(t *IntSet) {
 	}
 }
 
-func main() {
+// Elems returns the integer elements of the set as a slize
+func (s *IntSet) Elems() []int {
+	setsize := s.Len()
+	slice := make([]int, setsize)
+	var k int
 
+	for i, word := range s.words {
+		if word == 0 {
+			continue
+		}
+		for j := 0; j < WordSize; j++ {
+			if word&(1<<uint(j)) != 0 {
+				slice[k] = i*WordSize + j
+				k++
+			}
+		}
+	}
+	return slice
 }
