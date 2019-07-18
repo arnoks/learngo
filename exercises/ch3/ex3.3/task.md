@@ -5,5 +5,7 @@
 Color each polygon based on its height, so that peaks are
 colored red (#ff0000) and the valleys blue (#0000ff)
 
-## Implmentation
+## Implementation
+
+Done
 
