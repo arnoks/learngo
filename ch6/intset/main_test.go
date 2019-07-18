@@ -128,7 +128,7 @@ func TestIntSet_Len(t *testing.T) {
 	for i, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if gotLen := tt.s.Len(); gotLen != tt.wantLen {
-				t.Errorf("IntSet_Len() = %v, want %v", gotLen, tt.wantLen)
+				t.Errorf("IntSet.Len() = %v, want %v", gotLen, tt.wantLen)
 			}
 		})
 		s.Add(i)
@@ -226,6 +226,88 @@ func TestIntSet_AddAll(t *testing.T) {
 			if got := tt.s.String(); got != string(tt.want) {
 				t.Errorf("IntSet.AddAll() = %v, want %v", got, string(tt.want))
 			}
+		})
+	}
+}
+
+func TestIntSet_IntersectionWith(t *testing.T) {
+	var s1, s2, s1InterS2 IntSet
+	s1.AddAll(1, 2, 3, 5, 7, 55, 126, 256, 300)
+	s2.AddAll(20, 30, 7, 55, 126, 200, 400, 600)
+	s1InterS2.AddAll(7, 55, 126)
+	type args struct {
+		t *IntSet
+	}
+	tests := []struct {
+		name string
+		s    *IntSet
+		args args
+		want *IntSet
+	}{
+		{"Simple Intersection", &IntSet{}, args{&s1}, &IntSet{}},
+		{"Complex Intersection", &s1, args{&s2}, &s1InterS2},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.s.IntersectionWith(tt.args.t)
+			if tt.s.String() != tt.want.String() {
+				t.Errorf("IntSet.IntersectionWith() %v want %v", tt.s.String(), tt.want.String())
+			}
+		})
+	}
+}
+
+func TestIntSet_SymmetricDifference(t *testing.T) {
+	type args struct {
+		vals []int
+	}
+	tests := []struct {
+		name string
+		s    []int
+		args args
+		want []int
+	}{
+		{"Symmetric Difference 1", []int{}, args{[]int{1, 2, 3, 4, 5}}, []int{1, 2, 3, 4, 5}},
+		{"Symmetric Difference 2", []int{3, 4}, args{[]int{1, 2, 3, 4, 5}}, []int{1, 2, 5}},
+		{"Symmetric Difference 3", []int{3, 4}, args{[]int{1, 2}}, []int{1, 2, 3, 4}},
+		{"Symmetric Difference 3", []int{1, 70, 71}, args{[]int{70, 128}}, []int{1, 71, 128}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var s1, s2, want IntSet
+			s1.AddAll(tt.s...)
+			s2.AddAll(tt.args.vals...)
+			want.AddAll(tt.want...)
+			s1.SymmetricDifference(&s2)
+			if s1.String() != want.String() {
+				t.Errorf("IntSet.SymmentricDifference() %v want %v", s1.String(), want.String())
+			}
+		})
+	}
+}
+
+func TestIntSet_DifferenceWith(t *testing.T) {
+	type args struct {
+		t  *IntSet
+		s1 []int
+		s2 []int
+	}
+	tests := []struct {
+		name string
+		s    *IntSet
+		args args
+		want []int
+	}{
+		{"", &IntSet{}, args{&IntSet{}, []int{1, 2, 3, 4}, []int{4}}, []int{1, 2, 3}},
+		{"", &IntSet{}, args{&IntSet{}, []int{1, 2, 3, 4}, []int{1, 2}}, []int{3, 4}},
+		{"", &IntSet{}, args{&IntSet{}, []int{1, 2, 3, 4}, []int{1, 2, 3, 4}}, []int{}},
+		{"", &IntSet{}, args{&IntSet{}, []int{1, 2, 3, 4}, []int{5, 6, 7, 8}}, []int{1, 2, 3, 4}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.s.AddAll(tt.args.s1...)
+			tt.s.AddAll(tt.args.s2...)
+			tt.s.DifferenceWith(tt.args.t)
 		})
 	}
 }

@@ -98,6 +98,38 @@ func (s *IntSet) AddAll(vals ...int) {
 	}
 }
 
+// IntersectionWith caclulate the bit wise intersection of sets.
+func (s *IntSet) IntersectionWith(t *IntSet) {
+	for i, tword := range t.words {
+		if i < len(s.words) {
+			s.words[i] &= tword
+		}
+	}
+}
+
+// DifferenceWith calulates the bit wise difference of two set.
+// i.e. delete all elemets of set1 where set 2 is set. This is not
+// to be confused with the ^ operator
+func (s *IntSet) DifferenceWith(t *IntSet) {
+	for i, tword := range t.words {
+		if i < len(s.words) {
+			s.words[i] &= ^tword
+		}
+	}
+}
+
+// SymmetricDifference calculates the differnce of to sets where only the
+// elements are present in one or the other set, the exclusive or operator ^.
+func (s *IntSet) SymmetricDifference(t *IntSet) {
+	for i, tword := range t.words {
+		if i < len(s.words) {
+			s.words[i] ^= tword
+		} else {
+			s.words = append(s.words, tword)
+		}
+	}
+}
+
 func main() {
 
 }
