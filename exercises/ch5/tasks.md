@@ -24,6 +24,6 @@
 
 ## Closed
 1. Exercise 5.1 
-   Change the findlinks program to tarverse the
+   Change the findlinks program to traverse the
    n.FirstChild linked list using recursive calls
    to visit instead of a loop (findlinksrec)
