@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// Track a sample audio track data structure
 type Track struct {
 	Title  string
 	Artist string
