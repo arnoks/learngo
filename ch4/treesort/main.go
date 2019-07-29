@@ -1,8 +1,26 @@
 package main
 
+import (
+	"bytes"
+	"fmt"
+)
+
 type tree struct {
 	value       int
 	left, right *tree
+}
+
+// String Method for the *tree type reveals
+// the sequence of values in the tree.
+func (t *tree) String() string {
+	if t == nil {
+		return ""
+	}
+	var buf bytes.Buffer
+	fmt.Fprintf(&buf, "%v ", t.value)
+	fmt.Fprint(&buf, t.left.String())
+	fmt.Fprint(&buf, t.right.String())
+	return buf.String()
 }
 
 // Sort sorts values in place
@@ -12,6 +30,8 @@ func Sort(values []int) {
 		root = add(root, v)
 	}
 	appendValues(values[:0], root)
+	fmt.Println(root)
+
 }
 
 // appendValues appends the elements of t to values in order
@@ -37,7 +57,6 @@ func add(t *tree, value int) *tree {
 		t.left = add(t.left, value)
 	} else {
 		t.right = add(t.right, value)
-
 	}
 	return t
 }
