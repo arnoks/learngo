@@ -11,23 +11,23 @@ func TestCFConversion(t *testing.T) {
 	var f = []Fahrenheit{FreezingF, BoilingF, 68.0, 77.}
 
 	for i := 0; i < len(f); i++ {
-		if CtoF(c[i]) != f[i] {
-			t.Errorf("Failed converting from Celsius to Fahrenheit: %v != %v\n", c[i], f[i])
+		if CToF(c[i]) != f[i] {
+			t.Errorf("Failed converting from Celsius To Fahrenheit: %v != %v\n", c[i], f[i])
 		}
-		if FtoC(f[i]) != c[i] {
-			t.Errorf("Failed converting from Fahrenheit to Celsius %v != %v\n", f[i], c[i])
+		if FToC(f[i]) != c[i] {
+			t.Errorf("Failed converting from Fahrenheit To Celsius %v != %v\n", f[i], c[i])
 		}
-		if CtoK(c[i]) != k[i] {
-			t.Errorf("Failed converting from Celsius to Kelvin %v != %v\n", c[i], k[i])
+		if CToK(c[i]) != k[i] {
+			t.Errorf("Failed converting from Celsius To Kelvin %v != %v\n", c[i], k[i])
 		}
-		if KtoC(k[i]) != c[i] {
-			t.Errorf("Failed converting from Kelvin to Celsius %v != %v\n", k[i], c[i])
+		if KToC(k[i]) != c[i] {
+			t.Errorf("Failed converting from Kelvin To Celsius %v != %v\n", k[i], c[i])
 		}
-		if FtoK(f[i]) != k[i] {
-			t.Errorf("Failed converting from Fahrenheit to Kelvin %v != %v\n", f[i], k[i])
+		if FToK(f[i]) != k[i] {
+			t.Errorf("Failed converting from Fahrenheit To Kelvin %v != %v\n", f[i], k[i])
 		}
-		if KtoF(k[i]) != f[i] {
-			t.Errorf("Failed converting from Fahrenheit to Kelvin %v != %v\n", k[i], f[i])
+		if KToF(k[i]) != f[i] {
+			t.Errorf("Failed converting from Fahrenheit To Kelvin %v != %v\n", k[i], f[i])
 		}
 	}
 }

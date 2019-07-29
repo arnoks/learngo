@@ -4,11 +4,12 @@ import (
 	"flag"
 	"fmt"
 
-	"gopl.io/ch2/tempconv"
+	"github.com/arnoks/learngo/ch2/tempconv"
 )
 
 type celsiusFlag struct{ tempconv.Celsius }
 
+// celsiusFlag provides an implementation of the celsius flag conversion
 func (f *celsiusFlag) Set(s string) error {
 	var unit string
 	var value float64
@@ -20,25 +21,23 @@ func (f *celsiusFlag) Set(s string) error {
 	case "F", "°F":
 		f.Celsius = tempconv.FToC(tempconv.Fahrenheit(value))
 		return nil
+	case "K", "°K":
+		f.Celsius = tempconv.KToC(tempconv.Kelvin(value))
+		return nil
 	}
 	return fmt.Errorf("invalid temperatur %q", s)
 }
 
+// CelsiusFlag is a helper to create a Celsius Flag
 func CelsiusFlag(name string, value tempconv.Celsius, usage string) *tempconv.Celsius {
 	f := celsiusFlag{value}
 	flag.CommandLine.Var(&f, name, usage)
 	return &f.Celsius
 }
 
-var low = CelsiusFlag("low", 18.0, "the lower temperature boundary")
-var high = CelsiusFlag("high", 22.0, "the higher temperature boundary")
+var temp = CelsiusFlag("temp", 20.0, "the temperature")
 
 func main() {
-	temp := celsiusFlag{20}
-	flag.CommandLine.Var(&temp, "temp", "the temperature")
 	flag.Parse()
-	fmt.Println(low)
-	fmt.Println(temp)
-	fmt.Println(high)
-
+	fmt.Println(*temp)
 }

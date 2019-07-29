@@ -11,10 +11,9 @@
 
 7.5 [LimtReader](exercises/ch7/newreader/nr.go)
 
-7.6 Add support for Kelvin temperatures to tempflag
+7.6 [tempflag]ch7/tempflag/main.go
 
-7.7 Explain why the help messages contains °C when the default value of 20.0 
-    does not.
+7.7 see Closed
 
 7.8 Many Guis provide a table widget with a stateful multi-tier sort: the
     primary sort key is most recently clicked column head, the secondary sort
@@ -46,3 +45,10 @@
 7.5 The LimitReader function in the io package accepts an io.Reader r and a
     number of bytes n, and returns another Reader that reads from r but reports
     and end-of-file condition after n bytes. Implement it. 
+
+7.6 Added support for Kelvin temperatures to tempflag in ch 7
+
+7.7 Explain why the help messages contains °C when the default value of 20.0 
+    does not.
+    The default is just a float while the help message prints the string!
+
