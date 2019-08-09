@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Go Songs</title>
+  </head>
+  <body>
+    <p>Track List</p>
+    <table>
+      	<tr>
+          <th><a href="http://localhost:8001">Titel</a></th>
+          <th><a href="http://localhost:8001">Artist</a></th>
+          <th><a href="http://localhost:8001">Album</a></th>
+          <th><a href="http://localhost:8001">Year</a></th>
+          <th><a href="http://localhost:8001">Track Length</a></th>
+    	</tr>
+      	{{ range . }} 
+      			<tr>
+                  <td>{{ .Title }}</td>
+                  <td>{{ .Artist }}</td>
+                  <td>{{ .Album }}</td>
+                  <td>{{ .Year }}</td>
+                  <td>{{ .Length }}</td>
+      			</tr>
+			  {{ end }} 
+    </table>
+  </body>
+</html>
