@@ -1,0 +1,6 @@
+{{.TotalCount}} Sachverhalt:{{range .Items}}----------------------------------
+Nummer {{.Number}}
+Benutzer {{.User.Login}}
+Überschrift {{.Title | printf "%.64s"}}
+Alter {{.CreatedAt | daysAgo}} days
+{{end}}
