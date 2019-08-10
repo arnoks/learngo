@@ -1,9 +1,8 @@
-package main
+package tracks
 
 import (
 	"io"
 	"log"
-	"os"
 	"sort"
 	"text/template"
 	"time"
@@ -23,6 +22,7 @@ var goTracks = []*Track{
 	{"Go", "Moby", "Moby", 1992, length("3m38s")},
 	{"Go Ahead", "Alicia Keys", "As I Am", 2007, length("4m36s")},
 	{"Ready", "Martin Solveig", "Smash", 2011, length("4m24s")},
+	{"Go Gentle ", "Robbie Williams", "Swing Both Ways (Deluxe)", 2013, length("4m31s")},
 }
 
 func length(s string) time.Duration {
@@ -34,7 +34,7 @@ func length(s string) time.Duration {
 }
 
 func printTracks(tracks []*Track, w io.Writer) error {
-	t, err := template.ParseFiles("tracks.html")
+	t, err := template.ParseFiles("../tracks/tracks.html")
 	if err != nil {
 		return err
 	}
@@ -53,15 +53,13 @@ func (x customSort) Len() int           { return len(x.t) }
 func (x customSort) Less(i, j int) bool { return x.less(x.t[i], x.t[j]) }
 func (x customSort) Swap(i, j int)      { x.t[i], x.t[j] = x.t[j], x.t[i] }
 
-func htmlOut() io.WriteCloser {
-	wc, err := os.Create("sortedtrack.html")
-	if err != nil {
-		log.Fatalf("Error creating output file %v", err)
-	}
-	return wc
+func stableLess(i, j int) bool {
+	return false
 }
 
-func sortTrackList(w io.Writer, sortBy string) {
+// SortTrackList sort the track list by the given method. The sort should be
+// stable.
+func SortTrackList(w io.Writer, sortBy string) {
 	var sortFunc func(x, y *Track) bool
 
 	switch sortBy {
@@ -86,10 +84,4 @@ func sortTrackList(w io.Writer, sortBy string) {
 	if err := printTracks(goTracks, w); err != nil {
 		log.Fatalf("Error generating html %v", err)
 	}
-}
-
-func main() {
-	wc := htmlOut()
-	defer wc.Close()
-	sortTrackList(wc, "")
 }
