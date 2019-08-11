@@ -9,7 +9,11 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/tracks", trackRequest)
+
+	http.Handle("/tracks", http.HandlerFunc(trackRequest))
+	http.Handle("/test", http.HandlerFunc(showRequest))
+	http.Handle("/", http.FileServer(http.Dir("htdocs")))
+
 	log.Fatal(http.ListenAndServe("localhost:8001", nil))
 }
 

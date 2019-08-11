@@ -1,0 +1,34 @@
+/* Drucker brauchen ganz andere CSS Angaben als Bildschirme. Aus diesem Grund haben wir f�r diese auch eine eigene CSS Datei. */
+
+body {
+ background: white;
+ color: black;
+ font-family: georgia, "Times New Roman", Times serif; 
+}
+header {
+ text-align: right;
+ line-height: 0.8em;
+ font-size: 3em;
+ font-family: verdana, arial, sans-serif; 
+ letter-spacing: -3px;
+}
+header a#logo {
+ text-decoration: none;
+}
+.skip, aside, nav { 
+   display: none;
+}
+main a:link:after, main a:visited:after { 
+   content: " (" attr(href) ") ";
+   font-size: 0.9em; }
+main a[href^="/"]:after { 
+ content: " (http://example.org" attr(href) ") ";
+}
+.fright {
+ float: right;
+ margin: 0 0 1em 1em;
+}
+.fleft {
+ float: left;
+ margin: 0 1em 1em 0;
+}
