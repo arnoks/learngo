@@ -24,7 +24,7 @@ func (db database) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 			fmt.Fprintf(w, "%s: %s\n", item, price)
 		}
 	case "/price":
-		item := req.URL.Query().Get("Item")
+		item := req.URL.Query().Get("item")
 		price, ok := db[item]
 		if !ok {
 			w.WriteHeader(http.StatusNotFound)
@@ -34,6 +34,6 @@ func (db database) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		fmt.Fprintf(w, "%s\n", price)
 	default:
 		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, "no such page: %s \n", req.URL)
+		fmt.Fprintf(w, "go store, no such page: %s \n", req.URL)
 	}
 }

@@ -1,0 +1,22 @@
+swagger: '2.0'
+info:
+  title: Go Store Example http2
+  version: '1.0'
+host: localhost:8001
+basePath: /
+schemes:
+  - https
+paths:
+  /list:
+    get:
+      responses:
+        '200':
+          description: OK
+  /price:
+    get:
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - items:
+          collectionFormat: csv

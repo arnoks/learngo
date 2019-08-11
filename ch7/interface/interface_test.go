@@ -40,3 +40,13 @@ func TestNilPointerWrite(t *testing.T) {
 		}
 	}
 }
+
+func Test_Error(t *testing.T) {
+	var err error
+	err = io.EOF
+	fmt.Println(err)
+	fmt.Println(io.ErrClosedPipe)
+	fmt.Println(io.ErrNoProgress)
+	fmt.Println(io.ErrUnexpectedEOF)
+	fmt.Println(os.ErrClosed)
+}
