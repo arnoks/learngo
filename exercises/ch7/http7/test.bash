@@ -8,4 +8,4 @@ curl -d Item="pullover" -d Price="13.0" localhost:8001/add
 curl -d Item="skirt" -d Price="15.0" localhost:8001/add
 curl -d Item="sweater" -d Price="11.0" localhost:8001/add
 curl -d Item="sneaker" -d Price="13.0" localhost:8001/add
-curl -X "DELETE" localhost:8001/delete
+curl -X "DELETE" localhost:8001/stock

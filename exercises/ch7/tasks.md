@@ -21,6 +21,18 @@
     implementation of sort.Interface for use by such a table. Compare that 
     approach with repeated sorting using sort.Stable
 
+7.9 Use the html template package to replace the printTracks with a function
+    that displays tracks as HTML table. USe the solution to the previous exercise
+    to arrange that each click on a custom head makes an HTTP request to sort 
+    the table
+
+7.10 The sort.Interaface can be adapted to other uses. Write a function 
+     IsPalindrom (s. Interface ) bool that reports whether the sequence s is
+     a palindrome, in other words, reversing the sequence would not change
+     it. Assume that the elements at indices i and j are equal if !sLess (i,j)
+     && !s.Less(j,i).
+     
+
 ## Closed
 
 7.1 ch7/bytecounter

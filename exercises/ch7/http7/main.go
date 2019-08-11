@@ -14,9 +14,8 @@ func main() {
 	http.HandleFunc("/list", db.list)
 	http.HandleFunc("/price", db.price)
 	http.HandleFunc("/add", db.add)
-	http.HandleFunc("/stock", db.delete)
+	http.HandleFunc("/delete", db.delete)
 	http.HandleFunc("*", catchall)
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 	log.Fatal(http.ListenAndServe("localhost:8001", nil))
 }
 
@@ -33,39 +32,14 @@ func (d dollars) String() string { return fmt.Sprintf("$%.2f", d) }
 
 type database map[string]dollars
 
-var itemList = template.Must(template.New("itemList").Parse(`
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>{{ .Titel }}</title>
-		<link rel="stylesheet" href="/css/style.css">
-	</head>
-	<body>
-		<h1> {{ .Titel }}</h1>
-		<table>
-		<tr><th>Item<th/><th>Price<th/></tr>
-		{{range $k,$v := .List}}
-		    <tr><td>{{ $k }}<td/><td>{{ $v }}</td></tr>
-		{{end}}
-		</table>
-	</body>
-</html>`))
-
 func (db database) list(w http.ResponseWriter, req *http.Request) {
-	data := struct {
-		Titel string
-		List  map[string]dollars
-	}{
-		"Golang Pricelist Example",
-		db,
-	}
+
+	fmt.Fprintln(w)
 	mu.Lock()
-	err := itemList.Execute(w, data)
-	mu.Unlock()
-	if err != nil {
-		log.Fatal(err)
+	for item, price := range db {
+		fmt.Fprintf(w, "%s: %s\n", item, price)
 	}
+	mu.Unlock()
 }
 
 func (db database) price(w http.ResponseWriter, req *http.Request) {
@@ -116,23 +90,28 @@ func (db database) add(w http.ResponseWriter, req *http.Request) {
 	mu.Unlock()
 }
 
-func (db database) delete(w http.ResponseWriter, req *http.Request) {
+var itemList = template.Must(template.New("itemlist").Parse(`
+<h1>Go Store Items</h1>
+<table>
+<tr style='text-aling: left'>
+  <th>#</th>
+  <th>Item</th>
+  <th>Price</th>
+</tr>
+{{range .Items}}
+<tr>
+  <td>{{.Item}}</td>
+  <td>{{.Price}}</td>
+</tr>
+{{end}}
+</table>
+`))
 
-	if req.Method != "DELETE" {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintf(w, "\nDEBUG\nMethod: %v Uri: %v\n", req.Method, req.URL.RequestURI())
-		return
-	}
-
-	item := req.PostFormValue("Item")
-
-	if item == "" {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprint(w, "no item specified")
-		return
-	}
+func (db database) htmllist(w http.ResponseWriter, req *http.Request) {
 
 	mu.Lock()
-	delete(db, item)
+	if err := itemList.Execute(w, db.list); err != nil {
+		log.Fatal(err)
+	}
 	mu.Unlock()
 }
