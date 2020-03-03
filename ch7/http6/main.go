@@ -13,7 +13,6 @@ func main() {
 	http.HandleFunc("/list", db.list)
 	http.HandleFunc("/price", db.price)
 	http.HandleFunc("/add", db.add)
-	http.HandleFunc("/delete", db.delete)
 	http.HandleFunc("*", catchall)
 	log.Fatal(http.ListenAndServe("localhost:8001", nil))
 }
