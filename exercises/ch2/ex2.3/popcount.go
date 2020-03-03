@@ -49,3 +49,11 @@ func Eliminate(x uint64) int {
 	}
 	return c
 }
+
+// Recursive Apporach ~ 300 fold the lookup version
+func countSetBits(n uint64) int {
+	if n != 0 {
+		return 1 + countSetBits(n&(n-1))
+	}
+	return 0
+}

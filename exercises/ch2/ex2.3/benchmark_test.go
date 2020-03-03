@@ -44,3 +44,12 @@ func BenchmarkEliminate(b *testing.B) {
 		Eliminate(r)
 	}
 }
+
+func BenchmarkRecursion(b *testing.B) {
+	// run the Fib function b.N times
+	var r uint64
+	r = rand.Uint64()
+	for n := 0; n < b.N; n++ {
+		countSetBits(r)
+	}
+}
