@@ -9,14 +9,25 @@
 5. Exercise 5.5 countwordsandimages
 6. Exercise 5.6 see countwordsandimages and surfaces
 7. Exercise 5.7 htmlpretty
-   Develop startElement and endElement into a general HTML
-   pretty-printer. Print comment nodes, text nodes and attributes
-   of each element (\<a href '...'>). USer short forms like \<img/\> 
-   instead of \<img\>\</img\> when an element has no children. Write
-   a test to ensure that the output can be pasrsed Successfully.
-8. 
-9.
-10.
+8. Modify for EachNode so that the rpe and post functions return
+   a boolean result indicating whether to continue the traversal. USe it to write a
+   function ElementByID with the following signature that finds the first HTML
+   element with the specified id attribute. The funciton shoul stop the traversal
+   as soon as the match is found.
+
+   ```go
+   func ElementById(doc *html.NOde, id string)* html.Node
+   ````
+
+9. Write a function
+
+   ```go
+   func expand(s string, f func(String) string) string
+   ```
+
+   that replaces each substring "$foo" within s by the text returned by f("foo").
+
+10. 
 11.
 12.
 13.
@@ -54,3 +65,9 @@
 6. Exercise 5.6
    Modify the corner function in ch3/surface to use named results
    and a bare return statement.
+
+7. Develop startElement and endElement into a general HTML
+   pretty-printer. Print comment nodes, text nodes and attributes
+   of each element (\<a href '...'>). USer short forms like \<img/\> 
+   instead of \<img\>\</img\> when an element has no children. Write
+   a test to ensure that the output can be pasrsed Successfully.

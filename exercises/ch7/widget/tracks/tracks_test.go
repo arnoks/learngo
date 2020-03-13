@@ -58,7 +58,7 @@ func Test_sortTrackList(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sortTrackList(tt.args.w, tt.args.sortBy)
+			SortTrackList(tt.args.w, tt.args.sortBy)
 		})
 	}
 }

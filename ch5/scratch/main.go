@@ -17,7 +17,7 @@ func hypot(a, b float64) float64 {
 	return (math.Sqrt(a*a + b*b))
 }
 
-func grow_big() {
+func growBig() {
 	var stack []string
 	for i := 0; i < 1000; i++ {
 		stack = append(stack, "Hallo")

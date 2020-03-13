@@ -53,3 +53,12 @@ func BenchmarkRecursion(b *testing.B) {
 		countSetBits(r)
 	}
 }
+
+func BenchmarkSWAR(b *testing.B) {
+	// run the Fib function b.N times
+	var r uint64
+	r = rand.Uint64()
+	for n := 0; n < b.N; n++ {
+		numberOfSetBits(r)
+	}
+}

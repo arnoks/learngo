@@ -53,7 +53,14 @@ func Eliminate(x uint64) int {
 // Recursive Apporach ~ 300 fold the lookup version
 func countSetBits(n uint64) int {
 	if n != 0 {
-		return 1 + countSetBits(n&(n-1))
+		return int(1 + countSetBits(n&(n-1)))
 	}
 	return 0
+}
+
+// SWAR Algorithm
+func numberOfSetBits(i uint64) int {
+	i = i - ((i >> 1) & 0x5555555555555555)
+	i = (i & 0x3333333333333333) + ((i >> 2) & 0x3333333333333333)
+	return int((((i + (i >> 4)) & 0x0F0F0F0F0f0f0f0f) * 0x0101010101010101) >> 56)
 }

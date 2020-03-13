@@ -121,7 +121,7 @@ func StableSortTrackList(w io.Writer, sortBy string) {
 		return
 	}
 
-	sort.StableSort(customSort{goTracks, sortFunc})
+	sort.Stable(customSort{goTracks, sortFunc})
 	if err := printTracks(goTracks, w); err != nil {
 		log.Fatalf("Error generating html %v", err)
 	}

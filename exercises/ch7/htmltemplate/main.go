@@ -23,7 +23,7 @@ func main() {
 	paths := []string{
 		"todo.tmpl",
 	}
-	t := template.Must(template.New("html-tmpl").ParseGlob("*.tmpl"))
+	t := template.Must(template.New(paths))
 	err := t.Execute(os.Stdout, todos)
 	if err != nil {
 		panic(err)

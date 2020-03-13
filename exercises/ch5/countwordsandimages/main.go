@@ -15,7 +15,7 @@ func main() {
 	for _, url := range os.Args[1:] {
 		words, images, err := CountWordsAndImages(url)
 		if err != nil {
-			fmt.Errorf("error opening url %s, %v", url, err)
+			fmt.Printf("error opening url %s, %v", url, err)
 			continue
 		}
 		fmt.Printf("url: %s: Words %d, Images: %d\n", url, words, images)
