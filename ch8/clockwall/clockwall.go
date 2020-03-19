@@ -1,3 +1,6 @@
+// tcp client reading the clocks from various
+// clock servers and displays them in a table
+// Execercise 8.1
 package main
 
 import (
@@ -15,7 +18,7 @@ func main() {
 	if len(os.Args) > 1 {
 		clocks = os.Args[1:]
 	} else {
-		log.Fatal("No Adress")
+		log.Fatal("No Address")
 	}
 	for _, a := range clocks {
 		conn, err := net.Dial("tcp", a)

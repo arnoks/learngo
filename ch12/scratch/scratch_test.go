@@ -66,7 +66,7 @@ func TestStructs(t *testing.T) {
 	m := myType{"a", 42, math.Pi}
 	fmt.Println(m)
 	vom := reflect.ValueOf(m)
-	fmt.Println(tom)
+	fmt.Println(vom)
 	fmt.Printf("Struct has %d Fields\n", vom.NumField())
 	for i := 0; i < vom.NumField(); i++ {
 		fmt.Println(vom.Field(i), vom.Type().Field(i).Name)
