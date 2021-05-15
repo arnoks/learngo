@@ -7,7 +7,8 @@ plus some own examples.
 
 ## Subtitle
 
+```sequence{theme=hand}
+Bob->Alice : hello
+```
 
-```
-dsflgkdgä
-```
+$f(x) = x^2$ 
