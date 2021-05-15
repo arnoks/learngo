@@ -1,4 +1,4 @@
-package main
+package tracks
 
 import (
 	"io"
@@ -53,11 +53,12 @@ func Test_sortTrackList(t *testing.T) {
 		{"Default sort", args{"default", wc}},
 		{"Titel sort", args{"titel", wc}},
 		{"Album sort", args{"album", wc}},
+		{"Length sort", args{"artist", wc}},
 		{"Length sort", args{"length", wc}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sortTrackList(tt.args.w, tt.args.sortBy)
+			SortTrackList(tt.args.w, tt.args.sortBy)
 		})
 	}
 }

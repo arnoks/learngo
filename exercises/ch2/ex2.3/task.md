@@ -12,7 +12,7 @@ b. Add package tests benchmark to compare the performance of both versions.
 
 ## Results
 
-The implentation with a loop is ablout half as efficient as the original version.
+The implementation with a loop is about half as efficient as the original version.
 
 ```cmd
 Running tool: D:\Go\bin\go.exe test -benchmem -run=^$ github.com\arnoks\learngo\exercises\ch2\ex2.3 -bench . -coverprofile=C:\Users\vn401\AppData\Local\Temp\vscode-goU810AF\go-code-cover
@@ -20,8 +20,12 @@ Running tool: D:\Go\bin\go.exe test -benchmem -run=^$ github.com\arnoks\learngo\
 goos: windows
 goarch: amd64
 pkg: github.com/arnoks/learngo/exercises/ch2/ex2.3
-BenchmarkPopCount-4       	50000000	        21.5 ns/op	       0 B/op	       0 allocs/op
-BenchmarkPopCountLoop-4   	50000000	        39.2 ns/op	       0 B/op	       0 allocs/op
+go version .14 vs .11
+.14 BenchmarkPopCount-4    	  1000000000	         0.357 ns/op	       0 B/op	       0 allocs/op
+.11 BenchmarkPopCount-4       	50000000	        21.5   ns/op	       0 B/op	       0 allocs/op
+.14 BenchmarkLoop-4         	52170963	        23.5   ns/op	       0 B/op	       0 allocs/op
+.11 BenchmarkPopCountLoop-4   	50000000	        39.2   ns/op	       0 B/op	       0 allocs/op
+.14 BenchmarkRecursion-4     	11427918	        94.1   ns/op	       0 B/op	       0 allocs/op
 PASS
 coverage: 100.0% of statements
 ok  	github.com/arnoks/learngo/exercises/ch2/ex2.3	3.308s

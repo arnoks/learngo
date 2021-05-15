@@ -8,7 +8,7 @@ import (
 func main() {
 	naturals := make(chan int64, 50)
 	squares := make(chan int64, 50)
-	summer := make(chan int64, 5b0)
+	summer := make(chan int64, 50)
 	startt := time.Now()
 	go func() {
 		var i int64

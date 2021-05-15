@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/arnoks/learngo/chap2/tempconv"
+	"github.com/arnoks/learngo/ch2/tempconv"
 )
 
 func main() {

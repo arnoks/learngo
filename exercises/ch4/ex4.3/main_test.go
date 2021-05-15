@@ -27,14 +27,14 @@ func Test_reverse(t *testing.T) {
 			[]int{1},
 		},
 		{
-			"Reverse empty arry",
+			"Reverse empty Slice",
 			args{[]int{}},
 			[]int{},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			reverse(&tt.args.s)
+			reverse(tt.args.s)
 			for i, v := range tt.want {
 				if v != tt.args.s[i] {
 					t.Errorf("want[%d]: %d != %d", i, v, tt.args.s[i])

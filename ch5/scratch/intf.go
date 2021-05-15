@@ -1,5 +1,6 @@
 package main
 
+/*
 import (
 	"bytes"
 	"io"
@@ -23,3 +24,4 @@ func TestStuff(t testing.T) {
 	rwc = w // does not compile
 
 }
+*/
